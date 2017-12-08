@@ -53,6 +53,7 @@
                     </view>
                     <connections>
                         <outlet property="mapView" destination="7WU-a4-o0e" id="ILw-ku-JPs"/>
+                        <outlet property="stackView" destination="1sX-vc-ZZ7" id="pTk-GF-hh6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
