@@ -7,20 +7,22 @@
 //
 
 import Foundation
+import UIKit
 
 class Artwork {
-    let id: Int?
-    let title: String?
-    let artist: String?
-    let yearOfWork: String?
-    let information: String?
-    let latitude: Float?
-    let longitude: Float?
-    let locationNotes: String?
-    let fileName: String?
-    let lastModified: String?
+    var id: Int?
+    var title: String?
+    var artist: String?
+    var yearOfWork: String?
+    var information: String?
+    var latitude: Float?
+    var longitude: Float?
+    var locationNotes: String?
+    var fileName: String?
+    var lastModified: String?
+    var image: UIImage?
 
-    init(
+     init(
         id: Int? = nil,
         title: String? = nil,
         artist: String? = nil,

@@ -84,6 +84,7 @@ class MapViewController: UIViewController {
             if let dict = result.value as? [String: AnyObject] {
                 self.artworks = APIArtwork.parseArtworks(JSON: dict)
                 for artwork in self.artworks {
+                    self.fetchImage(fileName: artwork.fileName!)
                     let annotation = ArtworkAnnotation()
                     annotation.artwork = artwork
                     self.clusterManager.add(annotation)
@@ -94,6 +95,27 @@ class MapViewController: UIViewController {
         }
     }
 
+
+    private func fetchImage(fileName: String) {
+        Alamofire.requestImage("https://cgi.csc.liv.ac.uk/~phil/Teaching/COMP327/artwork_images/\(fileName)")
+            .responseImage { response in
+                print(response.request) // original URL request
+                print(response.response) // URL response
+                // print(response.data)     // server data
+                print(response.result) // result of response serialization
+
+                if let JSON = response.result.value {
+                    print("JSON: \(JSON)")
+
+                    let imageData = JSON as! Array<String>
+                    print(imageData)
+                    print("total number of images = \(imageData.count)\n")
+                    for image in imageData {
+                        print(image)
+                    }
+                }
+        }
+    }
     /// Creates a dictionary which contains the Buildings' as keys and the Artworks which take place there as values. The 'location notes' value is used to determine the building.
     private func configureBuildingDictionary() {
         for artwork in artworks {
@@ -151,7 +173,7 @@ extension MapViewController: MKMapViewDelegate {
                 view.annotation = annotation
             } else {
                 view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-                
+
                 /// Configures the tooltip which appears when selecting an annotation.
                 view!.canShowCallout = true
                 let informationButton = UIButton(type: .detailDisclosure)
