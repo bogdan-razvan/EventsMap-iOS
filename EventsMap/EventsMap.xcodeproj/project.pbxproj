@@ -21,6 +21,7 @@
 		AB4EEBD71FDAAA4400E6AB5C /* Cluster.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AB4EEBD31FDAAA3700E6AB5C /* Cluster.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AB4EEBDC1FDAC23900E6AB5C /* ArtworkDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4EEBDB1FDAC23900E6AB5C /* ArtworkDetailsViewController.swift */; };
 		AB4EEBDE1FDAD14F00E6AB5C /* ArtworkAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4EEBDD1FDAD14F00E6AB5C /* ArtworkAnnotation.swift */; };
+		ABB499A21FDC340300FE4D0E /* ArtworkTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB499A11FDC340300FE4D0E /* ArtworkTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -133,6 +134,7 @@
 		AB4EEBC61FDAAA3700E6AB5C /* Cluster.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Cluster.xcodeproj; path = ../Cluster/Cluster.xcodeproj; sourceTree = "<group>"; };
 		AB4EEBDB1FDAC23900E6AB5C /* ArtworkDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkDetailsViewController.swift; sourceTree = "<group>"; };
 		AB4EEBDD1FDAD14F00E6AB5C /* ArtworkAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkAnnotation.swift; sourceTree = "<group>"; };
+		ABB499A11FDC340300FE4D0E /* ArtworkTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,6 +189,7 @@
 			children = (
 				AB4CDA071FDAA1BD00B5C633 /* Artwork.swift */,
 				AB4EEBDD1FDAD14F00E6AB5C /* ArtworkAnnotation.swift */,
+				ABB499A11FDC340300FE4D0E /* ArtworkTableViewCell.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -384,6 +387,7 @@
 			files = (
 				AB4EEBDC1FDAC23900E6AB5C /* ArtworkDetailsViewController.swift in Sources */,
 				AB4CDA0A1FDAA1C600B5C633 /* APIArtwork.swift in Sources */,
+				ABB499A21FDC340300FE4D0E /* ArtworkTableViewCell.swift in Sources */,
 				AB4CD9F91FDAA0F900B5C633 /* EventsMap.xcdatamodeld in Sources */,
 				AB4EEBDE1FDAD14F00E6AB5C /* ArtworkAnnotation.swift in Sources */,
 				AB4CD9F31FDAA0F800B5C633 /* MapViewController.swift in Sources */,

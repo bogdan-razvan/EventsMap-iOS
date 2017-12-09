@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "MapViewController.numberOfSections(in:):MapViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "buildingDictionary">
+            </PersistentString>
+            <PersistentString
+               value = "buildingDictionary.keys.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MapViewController.configureBuildingDictionary():MapViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "buildingDictionary">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in MapViewController.populateMapWithPins():MapViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "buildingDictionary">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MapViewController.tableView(_:numberOfRowsInSection:):MapViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "Array(buildingDictionary.values)[section]">
+            </PersistentString>
+            <PersistentString
+               value = "buildingDictionary">
+            </PersistentString>
+            <PersistentString
+               value = "artworks">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ArtworkDetailsViewController.setupTextFields():ArtworkDetailsViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "String(describing: artwork?.id!)">
+            </PersistentString>
+            <PersistentString
+               value = "artwork?.id!">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

@@ -22,8 +22,8 @@ class APIArtwork {
             let information = artworksJSON["Information"] as? String
             let latitude = artworksJSON["lat"] as! String
             let longitude = artworksJSON["long"] as! String
-            let locationNotes = artworksJSON["name"] as? String
-            let fileName = artworksJSON["name"] as? String
+            let locationNotes = artworksJSON["locationNotes"] as? String
+            let fileName = artworksJSON["fileName"] as? String
             let lastModified = artworksJSON["lastModified"] as? String
             let artwork = Artwork(id: Int(id), title: title, artist: artist, yearOfWork: yearOfWork, information: information, latitude: Float(latitude), longitude: Float(longitude), locationNotes: locationNotes, fileName: fileName, lastModified: lastModified)
             result.append(artwork)
