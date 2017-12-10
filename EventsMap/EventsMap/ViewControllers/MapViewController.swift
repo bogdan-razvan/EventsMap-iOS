@@ -30,7 +30,6 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        purgeDatabase()
         setupClusterManager()
         setupMap()
         fetchArtworks()
@@ -127,24 +126,6 @@ class MapViewController: UIViewController {
                 buildingDictionary[artwork.locationNotes!] = []
             }
             buildingDictionary[artwork.locationNotes!]?.append(artwork)
-        }
-    }
-
-    private func purgeDatabase() {
-        // create the delete request for the specified entity
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Artwork")
-        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-
-        // get reference to the persistent container
-        let persistentContainer = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
-
-        // perform the delete
-        do {
-            try persistentContainer.viewContext.execute(deleteRequest)
-            print("purged database of artworks")
-            context.reset()
-        } catch let error as NSError {
-            print(error)
         }
     }
 
