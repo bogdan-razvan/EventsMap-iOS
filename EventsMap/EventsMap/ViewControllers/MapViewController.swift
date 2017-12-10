@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import AlamofireImage
 import MapKit
 import Cluster
 
@@ -30,7 +31,7 @@ class MapViewController: UIViewController {
 
         setupClusterManager()
         setupMap()
-        populateMapWithPins()
+        fetchArtworks()
     }
 
 
@@ -78,45 +79,42 @@ class MapViewController: UIViewController {
     }
 
     /// Reads the artwork information from the internet and creates annotations based on their latitude and longitude.
-    private func populateMapWithPins() {
+
+    private func fetchArtworks() {
         Alamofire.request(ARTWORK_URL).responseJSON { response in
             let result = response.result
             if let dict = result.value as? [String: AnyObject] {
                 self.artworks = APIArtwork.parseArtworks(JSON: dict)
-                for artwork in self.artworks {
-                    self.fetchImage(fileName: artwork.fileName!)
-                    let annotation = ArtworkAnnotation()
-                    annotation.artwork = artwork
-                    self.clusterManager.add(annotation)
-                }
             }
+            self.fetchArtworkImages()
             self.configureBuildingDictionary()
             self.tableView.reloadData()
         }
     }
+    /// Fetches the images for each artwork, and creates an annotations to be displayed on the map.
+    private func fetchArtworkImages() {
+        var fileNameArtworksMap: [String: Artwork] = [:]
+        for artwork in artworks {
+            fileNameArtworksMap[artwork.fileName!] = artwork
+        }
+        let baseURL = "https://cgi.csc.liv.ac.uk/~phil/Teaching/COMP327/artwork_images/"
 
-
-    private func fetchImage(fileName: String) {
-        Alamofire.requestImage("https://cgi.csc.liv.ac.uk/~phil/Teaching/COMP327/artwork_images/\(fileName)")
-            .responseImage { response in
-                print(response.request) // original URL request
-                print(response.response) // URL response
-                // print(response.data)     // server data
-                print(response.result) // result of response serialization
-
-                if let JSON = response.result.value {
-                    print("JSON: \(JSON)")
-
-                    let imageData = JSON as! Array<String>
-                    print(imageData)
-                    print("total number of images = \(imageData.count)\n")
-                    for image in imageData {
-                        print(image)
-                    }
+        for entry in fileNameArtworksMap {
+            let URL = "\(baseURL)\(entry.key)"
+            let urlString = URL.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
+            Alamofire.request(urlString!).responseImage { response in
+                let artwork = entry.value
+                if let image = response.result.value {
+                    artwork.image = image
                 }
+                let annotation = ArtworkAnnotation()
+                annotation.artwork = artwork
+                self.clusterManager.add(annotation)
+            }
         }
     }
-    /// Creates a dictionary which contains the Buildings' as keys and the Artworks which take place there as values. The 'location notes' value is used to determine the building.
+
+/// Creates a dictionary which contains the Buildings' as keys and the Artworks which take place there as values. The 'location notes' value is used to determine the building.
     private func configureBuildingDictionary() {
         for artwork in artworks {
             if buildingDictionary[artwork.locationNotes!] == nil {
@@ -145,9 +143,9 @@ extension MapViewController: MKMapViewDelegate {
                 }
             }
             mapView.setVisibleMapRect(zoomRect, animated: true)
-        } else if let cluster = annotation as? ArtworkAnnotation {
+        } else if let annotation = annotation as? ArtworkAnnotation {
             /// If a simple annotation is selected on the map, we save its value.
-            selectedArtwork = cluster.artwork
+            selectedArtwork = annotation.artwork
         }
     }
 
@@ -166,7 +164,7 @@ extension MapViewController: MKMapViewDelegate {
             return view
         } else {
             /// If the annotation is a simple annotation, it is configured as such.
-            guard let annotation = annotation as? Annotation, let style = annotation.style else { return nil }
+            guard let annotation = annotation as? ArtworkAnnotation else { return nil }
             let identifier = "Pin"
             var view = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKPinAnnotationView
             if let view = view {
@@ -176,13 +174,15 @@ extension MapViewController: MKMapViewDelegate {
 
                 /// Configures the tooltip which appears when selecting an annotation.
                 view!.canShowCallout = true
+
+                /// Setting the  artwork image to the annotation on the left side
+                let imageView = UIImageView(frame: CGRect(x: 50, y: 50, width: 50, height: 50))
+                imageView.image = annotation.artwork.image
+                view!.leftCalloutAccessoryView = imageView
+
+                /// Setting the information button on the right
                 let informationButton = UIButton(type: .detailDisclosure)
                 view!.rightCalloutAccessoryView = informationButton
-            }
-            if #available(iOS 9.0, *), case let .color(color, _) = style {
-                view?.pinTintColor = color
-            } else {
-                view?.pinTintColor = .green
             }
             return view
         }

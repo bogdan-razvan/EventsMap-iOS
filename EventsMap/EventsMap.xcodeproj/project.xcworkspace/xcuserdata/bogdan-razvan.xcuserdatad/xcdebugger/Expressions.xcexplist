@@ -3,6 +3,31 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "MapViewController.mapView(_:didSelect:):MapViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "selectedArtwork">
+            </PersistentString>
+            <PersistentString
+               value = "annotation.artwork">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MapViewController.tableView(_:numberOfRowsInSection:):MapViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "buildingDictionary">
+            </PersistentString>
+            <PersistentString
+               value = "artworks">
+            </PersistentString>
+            <PersistentString
+               value = "Array(buildingDictionary.values)[section]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "MapViewController.numberOfSections(in:):MapViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -30,16 +55,27 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "MapViewController.tableView(_:numberOfRowsInSection:):MapViewController.swift">
+         contextName = "closure #1 in MapViewController.fetchImage(fileName:):MapViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "Array(buildingDictionary.values)[section]">
+               value = "&quot;https://cgi.csc.liv.ac.uk/~phil/Teaching/COMP327/artwork_images/\(fileName)&quot;">
             </PersistentString>
             <PersistentString
-               value = "buildingDictionary">
+               value = "fileName">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MapViewController.mapView(_:viewFor:):MapViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = " view.annotation">
             </PersistentString>
             <PersistentString
-               value = "artworks">
+               value = "UIImage(named: &quot;IMG_E4004.JPG&quot;)">
+            </PersistentString>
+            <PersistentString
+               value = " view!.image">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

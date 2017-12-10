@@ -4,3 +4,6 @@
 [submodule "Cluster"]
 	path = Cluster
 	url = https://github.com/efremidze/Cluster
+[submodule "AlamofireImage"]
+	path = AlamofireImage
+	url = https://github.com/Alamofire/AlamofireImage.git

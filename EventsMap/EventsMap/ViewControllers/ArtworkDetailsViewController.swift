@@ -42,7 +42,7 @@ class ArtworkDetailsViewController: UIViewController {
         longitudeLabel.text = String(describing: artwork!.longitude!)
         locationNotesTextView.text = artwork?.locationNotes
         lastModifiedLabel.text = artwork?.lastModified
-
+        imageView.image = artwork?.image
         [informationTextView, locationNotesTextView].forEach { textField in
             textField!.layer.borderWidth = 1
             textField!.layer.borderColor = UIColor.black.cgColor }
