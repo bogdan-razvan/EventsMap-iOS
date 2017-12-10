@@ -2,8 +2,8 @@
 //  AppDelegate.swift
 //  EventsMap
 //
-//  Created by bogdan razvan on 08/12/2017.
-//  Copyright © 2017 bogdan razvan. All rights reserved.
+//  Created by Laszlo Palfi on 08/12/2017.
+//  Copyright © 2017 Laszlo Palfi. All rights reserved.
 //
 
 import UIKit
@@ -91,3 +91,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+let ad = UIApplication.shared.delegate as! AppDelegate
+let context = ad.persistentContainer.viewContext

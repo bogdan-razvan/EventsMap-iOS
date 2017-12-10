@@ -2,8 +2,8 @@
 //  ViewController.swift
 //  EventsMap
 //
-//  Created by bogdan razvan on 07/12/2017.
-//  Copyright © 2017 bogdan razvan. All rights reserved.
+//  Created by Laszlo Palfi on 07/12/2017.
+//  Copyright © 2017 Laszlo Palfi. All rights reserved.
 //
 
 import UIKit
@@ -11,6 +11,7 @@ import Alamofire
 import AlamofireImage
 import MapKit
 import Cluster
+import CoreData
 
 /// URL where to download the Artwork information from
 let ARTWORK_URL = "https://cgi.csc.liv.ac.uk/~phil/Teaching/COMP327/artworksOnCampus/data.php?class=artworks&lastUpdate=2017-11-01"
@@ -29,6 +30,7 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        purgeDatabase()
         setupClusterManager()
         setupMap()
         fetchArtworks()
@@ -84,8 +86,12 @@ class MapViewController: UIViewController {
         Alamofire.request(ARTWORK_URL).responseJSON { response in
             let result = response.result
             if let dict = result.value as? [String: AnyObject] {
-                self.artworks = APIArtwork.parseArtworks(JSON: dict)
+                let parsedArtworks = APIArtwork.parseArtworks(JSON: dict)
+                for artwork in parsedArtworks {
+                    context.insert(artwork)
+                }
             }
+            self.readArtworksFromDatabase()
             self.fetchArtworkImages()
             self.configureBuildingDictionary()
             self.tableView.reloadData()
@@ -105,7 +111,7 @@ class MapViewController: UIViewController {
             Alamofire.request(urlString!).responseImage { response in
                 let artwork = entry.value
                 if let image = response.result.value {
-                    artwork.image = image
+                    artwork.image = UIImagePNGRepresentation(image)! as NSData
                 }
                 let annotation = ArtworkAnnotation()
                 annotation.artwork = artwork
@@ -121,6 +127,39 @@ class MapViewController: UIViewController {
                 buildingDictionary[artwork.locationNotes!] = []
             }
             buildingDictionary[artwork.locationNotes!]?.append(artwork)
+        }
+    }
+
+    private func purgeDatabase() {
+        // create the delete request for the specified entity
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Artwork")
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+
+        // get reference to the persistent container
+        let persistentContainer = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
+
+        // perform the delete
+        do {
+            try persistentContainer.viewContext.execute(deleteRequest)
+            print("purged database of artworks")
+            context.reset()
+        } catch let error as NSError {
+            print(error)
+        }
+    }
+
+    private func readArtworksFromDatabase() {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Artwork")
+        request.returnsObjectsAsFaults = false
+        do {
+            let result = try context.fetch(request)
+            for data in result as! [Artwork] {
+                if !artworks.contains(data) {
+                    artworks.append(data)
+                }
+            }
+        } catch {
+            print("Failed")
         }
     }
 }
@@ -177,7 +216,8 @@ extension MapViewController: MKMapViewDelegate {
 
                 /// Setting the  artwork image to the annotation on the left side
                 let imageView = UIImageView(frame: CGRect(x: 50, y: 50, width: 50, height: 50))
-                imageView.image = annotation.artwork.image
+                imageView.image = UIImage(data: (annotation.artwork.image)! as Data, scale: 1.0)
+
                 view!.leftCalloutAccessoryView = imageView
 
                 /// Setting the information button on the right
@@ -225,7 +265,7 @@ extension MapViewController: UITableViewDelegate, UITableViewDataSource {
         for annotation in clusterManager.annotations {
             if annotation.title! == selectedArtwork.title! {
 
-                let location = CLLocation(latitude: Double.init(selectedArtwork.latitude!), longitude: Double.init(selectedArtwork.longitude!))
+                let location = CLLocation(latitude: Double.init(selectedArtwork.latitude!)!, longitude: Double.init(selectedArtwork.longitude!)!)
                 let regionRadius: CLLocationDistance = 30
                 let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, regionRadius, regionRadius)
 

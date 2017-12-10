@@ -24,6 +24,8 @@
 		ABB499C41FDC4B9600FE4D0E /* AlamofireImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABB499B71FDC4B8C00FE4D0E /* AlamofireImage.framework */; };
 		ABB499C51FDC4B9600FE4D0E /* AlamofireImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ABB499B71FDC4B8C00FE4D0E /* AlamofireImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		ABF68DD41FDD647D00BFB3B3 /* PNG_transparency_demonstration_1.png in Resources */ = {isa = PBXBuildFile; fileRef = ABF68DD31FDD647C00BFB3B3 /* PNG_transparency_demonstration_1.png */; };
+		ABF68DDB1FDD782500BFB3B3 /* Artwork+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF68DD91FDD782500BFB3B3 /* Artwork+CoreDataClass.swift */; };
+		ABF68DDC1FDD782500BFB3B3 /* Artwork+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF68DDA1FDD782500BFB3B3 /* Artwork+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -196,6 +198,8 @@
 		ABB499A11FDC340300FE4D0E /* ArtworkTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkTableViewCell.swift; sourceTree = "<group>"; };
 		ABB499AA1FDC4B8B00FE4D0E /* AlamofireImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AlamofireImage.xcodeproj; path = ../AlamofireImage/AlamofireImage.xcodeproj; sourceTree = "<group>"; };
 		ABF68DD31FDD647C00BFB3B3 /* PNG_transparency_demonstration_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PNG_transparency_demonstration_1.png; sourceTree = "<group>"; };
+		ABF68DD91FDD782500BFB3B3 /* Artwork+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Artwork+CoreDataClass.swift"; sourceTree = "<group>"; };
+		ABF68DDA1FDD782500BFB3B3 /* Artwork+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Artwork+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -250,6 +254,8 @@
 		AB4CDA051FDAA1AC00B5C633 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				ABF68DD91FDD782500BFB3B3 /* Artwork+CoreDataClass.swift */,
+				ABF68DDA1FDD782500BFB3B3 /* Artwork+CoreDataProperties.swift */,
 				AB4CDA071FDAA1BD00B5C633 /* Artwork.swift */,
 				AB4EEBDD1FDAD14F00E6AB5C /* ArtworkAnnotation.swift */,
 				ABB499A11FDC340300FE4D0E /* ArtworkTableViewCell.swift */,
@@ -521,7 +527,9 @@
 				AB4CDA0A1FDAA1C600B5C633 /* APIArtwork.swift in Sources */,
 				ABB499A21FDC340300FE4D0E /* ArtworkTableViewCell.swift in Sources */,
 				AB4CD9F91FDAA0F900B5C633 /* EventsMap.xcdatamodeld in Sources */,
+				ABF68DDC1FDD782500BFB3B3 /* Artwork+CoreDataProperties.swift in Sources */,
 				AB4EEBDE1FDAD14F00E6AB5C /* ArtworkAnnotation.swift in Sources */,
+				ABF68DDB1FDD782500BFB3B3 /* Artwork+CoreDataClass.swift in Sources */,
 				AB4CD9F31FDAA0F800B5C633 /* MapViewController.swift in Sources */,
 				AB4CDA081FDAA1BD00B5C633 /* Artwork.swift in Sources */,
 				AB4CD9F11FDAA0F800B5C633 /* AppDelegate.swift in Sources */,

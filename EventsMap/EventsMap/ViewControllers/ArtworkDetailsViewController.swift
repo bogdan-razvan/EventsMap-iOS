@@ -2,8 +2,8 @@
 //  ArtworkDetailsViewController.swift
 //  EventsMap
 //
-//  Created by bogdan razvan on 08/12/2017.
-//  Copyright © 2017 bogdan razvan. All rights reserved.
+//  Created by Laszlo Palfi on 08/12/2017.
+//  Copyright © 2017 Laszlo Palfi. All rights reserved.
 //
 
 import UIKit
@@ -33,16 +33,16 @@ class ArtworkDetailsViewController: UIViewController {
     }
 
     private func setupTextFields() {
-        idLabel.text = String(describing: artwork!.id!)
+        idLabel.text = artwork?.id
         titleLabel.text = artwork?.title
         artistLabel.text = artwork?.artist
         yearOfWorkLabel.text = artwork?.yearOfWork
         informationTextView.text = artwork?.information
-        latitudeLabel.text = String(describing: artwork!.latitude!)
-        longitudeLabel.text = String(describing: artwork!.longitude!)
+        latitudeLabel.text = artwork?.latitude
+        longitudeLabel.text = artwork?.longitude
         locationNotesTextView.text = artwork?.locationNotes
         lastModifiedLabel.text = artwork?.lastModified
-        imageView.image = artwork?.image
+        imageView.image = UIImage(data:(artwork?.image)! as Data,scale:1.0)
         [informationTextView, locationNotesTextView].forEach { textField in
             textField!.layer.borderWidth = 1
             textField!.layer.borderColor = UIColor.black.cgColor }
